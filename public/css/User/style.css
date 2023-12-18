@@ -1,0 +1,32 @@
+.html{
+    font-family: sans-serif;
+}
+#menu{
+	list-style: none;
+	position: absolute;
+}
+
+header{
+    position: absolute;
+    width: 100%;
+    background:darkgray;
+    height: 80px;
+    padding-top: 0%;
+    top: 0px;
+    left: 0px;
+}
+#logo{
+    padding-top: 30px;
+    padding-left: 40%;
+    
+}
+#title{
+    color: aquamarine;
+    font-size: 20px;
+    position: relative;
+}
+#main{
+    position: absolute;
+    top: 80px;
+    padding-left: 40%;
+}

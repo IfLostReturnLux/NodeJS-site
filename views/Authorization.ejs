@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crystall Messager</title>
+</head>
+<body bgcolor="#f8f8ff">
+    <%- include("Header")-%>
+<img id="image" src="/PrintNaKovrik_Montazhnaya_oblast_1.jpg">
+<div id="main">
+    <form class="main-form" method="post" action="Login(this)"">
+        <p id="name">Вход в Crystall Messager!</p>
+        <label for="loginField" class="fieldLabel">Логин: </label>
+        <input type="text" name="login" placeholder="Логин" id="loginField"><br><br>
+        <label for="passwordField" class="fieldLabel">Пароль: </label>
+        <input type="password" name="password" placeholder="Пароль" id="passwordField"><br><br>
+        <button type="submit" name="submit" id="submit">Авторизоваться</button>
+        <div id="error"></div>
+    </form>
+</div>
+    <script src="Authentification.js"></script>
+</body>
+</html>
