@@ -1,5 +1,15 @@
 const express = require('express')
+const http = require('http');
+
+const db = require("./public/DB")
+const postgreesql = require("./public/PostgreeDB")
+
 const app = express()
+const server = require('http').Server(app);
+
+const io = require("socket.io")(server);
+
+
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: false}))
@@ -20,6 +30,9 @@ app.get("/User", (req,res) => {
 app.get("/User/News", (req,res) => {
     res.render('News')
 })
+app.get("/User/ChatRoom.js", (req,res) => {
+    res.send("public\ChatRoom.js")
+})
 app.get("/User/Messages", (req,res) => {
     res.render('Messages')
 })
@@ -27,23 +40,60 @@ app.get("/User/Groups", (req,res) => {
     res.render('Groups')
 })
 
-app.post('/check-user', (req,res) => {
+app.post('/Authorization', (req,res) => {
     console.log(req.body)
     let login = req.body.login
     let password = req.body.password
-    const db = require('./public/DB')
-    //db.createConnection()
-    if(db.checkLoginData(login,password)){
-        //return res.send({"login": "kot"}), res.redirect("User") 
-    }
-    else{
-        console.log("Вы ввели неверные данные!")
-    }
-    
+    var data = {"login":login,"password":password}
+    console.log("data " + data)
+    //var sql = "SELECT * FROM users.logindata WHERE login = ? AND password = ?"
+    var sql = "SELECT * FROM users.public.logindata WHERE login = $1 AND password = $2"
+    postgreesql.checkUser(sql,data,(err,results) =>{
+            console.log("result1(rows) =" + results);
+            if(results > 0){
+                return res.redirect("User")
+            }
+            else{
+                console.log("Вы ввели неверные данные!");
+            }
+        });
+})
+
+app.post('/Registration',(req,res) => {
+    console.log(req.body)
+    var data = [req.body.login]
+    var regData = {"login":req.body.login, "password":req.body.password}
+    console.log("data " + regData)
+    var sql = "SELECT * FROM users.logindata WHERE login = ?"
+    db.checkUser(sql,data,(err,results) =>{
+        if(results > 0){
+            console.log("Пользователь с таким именем уже занят!");
+        }
+        else{
+            sql = "INSERT INTO users.logindata (login,password) VALUES (?,?)"
+            db.createUser(sql,regData)
+            return res.redirect("User")
+        }
+    })
+
 })
 
 const PORT = 3000;
 
-app.listen(3000,() =>{
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    io.emit('info', "Hello world!")
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+  });
+      
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+    io.emit('chat message', msg);
+  });
+})
+
+server.listen(PORT,() =>{
     console.log(`Сервер запущен http://localhost:${PORT}`)
 })
+

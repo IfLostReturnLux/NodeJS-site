@@ -1,5 +1,2 @@
 /node_modules/
-*.jpg
-*.jpeg
-*.png
-*.gif
+.vscode/settings.json

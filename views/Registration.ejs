@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Crystall Messager</title>
 </head>
-<body bgcolor="#f8f8ff">
+<body bgcolor="#d2ccea">
     <%- include("Header")-%>
 <img id="image" src="/PrintNaKovrik_Montazhnaya_oblast_1.jpg">
     <div id="main">
-        <form class="main-form" method="post" action="/check-user">
+        <form class="main-form" onsubmit="return Registration(this)" method="post">
             <p class="name" id="name">Регистрация в Crystall Messager!</p>
             <label for ="nameField" class="fieldLabel">Ваше имя: </label>
             <input type="text" name="name" id ="nameField" placeholder="Имя"><br><br>
@@ -18,7 +18,7 @@
             <input type="password" name="password" placeholder="Пароль" id="passwordField"><br><br>
             <label for="rePasswordField" class="fieldLabel">Повторите пароль: </label>
             <input type="password" name="rePassword" placeholder="Повторите пароль" id="rePasswordField"><br><br>
-            <button type="submit" name="submit" id="submit">Регистрация</button>
+            <button type="submit" name="submit" id="submit">Зарегистрироваться</button>
             <div id="error"></div>
         </form>
     </div>

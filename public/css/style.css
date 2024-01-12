@@ -1,3 +1,10 @@
+input{
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: #e3dcfc;
+    border-width: 1px;
+}
+
 #logo{
     padding-top: 10px;
     padding-left: 30px;
@@ -5,13 +12,16 @@
 }
 
 #title{
-    color: aquamarine;
+    position:absolute;
+    z-index: 1000;
+    color: #b1ccf7;
     font-size: 36px;
     font-family: sans-serif;
+
 }
 
 #column{
-    color: aquamarine;
+    color: #b1ccf7;
     font-family: sans-serif;
 }
 
@@ -26,8 +36,10 @@
 header{
     position: fixed;
     width: 100%;
-    background:darkgray;
+    background: #657bb4;
     height: 80px;
+    top:0px;
+    left: 0px;
 }
 
 #image{
@@ -55,28 +67,19 @@ header{
         font-family: sans-serif;
         font-size: 20px;
     }
-    #passwordField{
-        font-family: sans-serif;
-        font-size: 16px;
-    }
-    #loginField {
-        font-family: sans-serif;
-        font-size: 16px;
-    }
     #nameField{
         position: relative;
         font-family: sans-serif;
         font-size: 16px;
-    }
-    #rePasswordField{
-        font-family: sans-serif;
-        font-size: 16px;
+        background-color: #e3dcfc;
     }
 }
 
 #submit{
     font-family: sans-serif;
     font-size: 20px;
+    background-color: #c1bad6;
+    border-width: 1px;
 }
 
 #name{
