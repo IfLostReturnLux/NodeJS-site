@@ -2,13 +2,12 @@ const express = require('express')
 const http = require('http');
 
 const db = require("./public/DB")
-const postgreesql = require("./public/PostgreeDB")
+//const postgreesql = require("./public/PostgreeDB")
 
 const app = express()
 const server = require('http').Server(app);
 
 const io = require("socket.io")(server);
-
 
 
 app.set('view engine', 'ejs')
@@ -41,14 +40,14 @@ app.get("/User/Groups", (req,res) => {
 })
 
 app.post('/Authorization', (req,res) => {
-    console.log(req.body)
     let login = req.body.login
     let password = req.body.password
     var data = {"login":login,"password":password}
+    var sql = "SELECT * FROM users.logindata WHERE login = ? AND password = ?"
+
     console.log("data " + data)
-    //var sql = "SELECT * FROM users.logindata WHERE login = ? AND password = ?"
-    var sql = "SELECT * FROM users.public.logindata WHERE login = $1 AND password = $2"
-    postgreesql.checkUser(sql,data,(err,results) =>{
+
+    db.checkUser(sql,data,(err,results) =>{
             console.log("result1(rows) =" + results);
             if(results > 0){
                 return res.redirect("User")

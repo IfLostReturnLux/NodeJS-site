@@ -2,9 +2,8 @@ function Login(form) {
     var login = form.login.value
     var password = form.password.value
     var data = {"login":login , "password":password}
-    document.cookie = "login=kot"
-    console.log(document.cookie)
     var fail ="";
+    
     if(login == "" || password == ""){ 
         fail ="Неправильно заполнены поля!";
     }

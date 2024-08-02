@@ -1,22 +1,12 @@
 const mysql = require ("mysql2");
 
-
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'users'
+    database: 'diplom'
 }).promise();
 
-
- //sync function CheckUser(login, password, callback) {
- //      login = login
- //      password = password
-
- //      const [rows, fields] = await connection.query("SELECT * FROM users.logindata WHERE login = ? AND password = ?", [login, password]);
- //      connection.end;
- //      callback(null,rows.length);
- //  }
 async function CheckUser(sql, data, callback) {
     console.log(sql)
     const [rows, fields] = await connection.query(sql, [data.login,data.password]);
